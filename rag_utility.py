@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain_community.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -30,7 +30,7 @@ def process_document_to_faiss(uploaded_files):
             f.write(uploaded_file.getbuffer())
         
         try:
-            loader = UnstructuredPDFLoader(temp_path)
+            loader = PyPDFLoader(temp_path)
             documents = loader.load()
             # Ensure metadata tracks the filename
             for doc in documents:
